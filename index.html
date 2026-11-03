@@ -1,6 +1,401 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Trade Tech Link Tree</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Trade Tech (Solar) | Connect With Us</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Bricolage Grotesque (condensed axes) & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Mobile-first ergonomics & system reset */
+    :root {
+      --sat: env(safe-area-inset-top, 0px);
+      --sab: env(safe-area-inset-bottom, 0px);
+      --sal: env(safe-area-inset-left, 0px);
+      --sar: env(safe-area-inset-right, 0px);
+    }
+
+    * {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-user-select: none;
+      box-sizing: border-box;
+    }
+
+    body {
+      touch-action: manipulation;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding-top: max(16px, var(--sat));
+      padding-bottom: max(20px, var(--sab));
+      padding-left: max(16px, var(--sal));
+      padding-right: max(16px, var(--sar));
+    }
+
+    .font-brand {
+      font-family: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-stretch: 75%;
+      letter-spacing: -0.02em;
+    }
+
+    .font-body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* Ambient mobile gradient orbs anchored at bottom fading upward */
+    @keyframes pulseOrbBlue {
+      0%, 100% {
+        transform: translate3d(-15%, 10%, 0) scale(1);
+        opacity: 0.65;
+      }
+      50% {
+        transform: translate3d(5%, 0%, 0) scale(1.18);
+        opacity: 0.85;
+      }
+    }
+
+    @keyframes pulseOrbGreen {
+      0%, 100% {
+        transform: translate3d(15%, 15%, 0) scale(1.05);
+        opacity: 0.55;
+      }
+      50% {
+        transform: translate3d(-10%, 5%, 0) scale(1.22);
+        opacity: 0.8;
+      }
+    }
+
+    .mobile-ambient-blue {
+      animation: pulseOrbBlue 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      will-change: transform, opacity;
+    }
+
+    .mobile-ambient-green {
+      animation: pulseOrbGreen 14s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      will-change: transform, opacity;
+    }
+
+    /* Apple Liquid Glass tokens calibrated for mobile GPU rasterization */
+    .liquid-glass-btn {
+      position: relative;
+      background: rgba(255, 255, 255, 0.045);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      box-shadow: 
+        0 14px 28px -10px rgba(0, 0, 0, 0.55),
+        inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.22),
+        inset 0 -1px 1px 0 rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 1.25rem;
+      transition: transform 0.16s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+      overflow: hidden;
+    }
+
+    /* Liquid Sheen sweep reflection on touch interaction */
+    .liquid-glass-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.12), 
+        rgba(255, 255, 255, 0.22), 
+        transparent
+      );
+      transform: skewX(-20deg);
+      transition: left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .liquid-glass-btn:active::after {
+      left: 160%;
+      transition: left 0.4s ease-out;
+    }
+
+    /* Physical tactile feedback for touch */
+    .liquid-glass-btn:active {
+      transform: scale(0.965);
+      box-shadow: 
+        0 6px 14px -4px rgba(0, 0, 0, 0.6),
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
+    }
+
+    /* Subtly tinted glazes */
+    .tint-whatsapp {
+      background: linear-gradient(135deg, rgba(37, 211, 102, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%);
+    }
+    .tint-whatsapp:active {
+      border-color: rgba(37, 211, 102, 0.45);
+      box-shadow: 0 0 25px rgba(37, 211, 102, 0.25), inset 0 1px 1.5px rgba(255, 255, 255, 0.3);
+    }
+
+    .tint-call {
+      background: linear-gradient(135deg, rgba(66, 133, 244, 0.12) 0%, rgba(52, 168, 83, 0.04) 100%);
+    }
+    .tint-call:active {
+      border-color: rgba(66, 133, 244, 0.45);
+      box-shadow: 0 0 25px rgba(66, 133, 244, 0.25), inset 0 1px 1.5px rgba(255, 255, 255, 0.3);
+    }
+
+    .tint-instagram {
+      background: linear-gradient(135deg, rgba(225, 48, 108, 0.11) 0%, rgba(131, 58, 180, 0.04) 100%);
+    }
+    .tint-instagram:active {
+      border-color: rgba(225, 48, 108, 0.45);
+      box-shadow: 0 0 25px rgba(225, 48, 108, 0.25), inset 0 1px 1.5px rgba(255, 255, 255, 0.3);
+    }
+
+    .tint-facebook {
+      background: linear-gradient(135deg, rgba(24, 119, 242, 0.11) 0%, rgba(255, 255, 255, 0.03) 100%);
+    }
+    .tint-facebook:active {
+      border-color: rgba(24, 119, 242, 0.45);
+      box-shadow: 0 0 25px rgba(24, 119, 242, 0.25), inset 0 1px 1.5px rgba(255, 255, 255, 0.3);
+    }
+
+    .icon-liquid-pod {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    }
+  </style>
 </head>
-<body><h1>Trade Tech Link Tree</h1></body>
+
+<body class="bg-[#07090e] text-slate-100 flex flex-col justify-between items-center relative overflow-x-hidden font-body">
+
+  <!-- Mobile Live Bottom Gradient Bleeding Smoothly Toward Center -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0 flex items-end justify-center">
+    <!-- Seamless vertical gradient fade toward dark center -->
+    <div class="absolute inset-0 bg-gradient-to-t from-transparent via-[#07090e]/85 to-[#07090e] z-10 pointer-events-none"></div>
+
+    <!-- Living Solar Blue Orb -->
+    <div class="mobile-ambient-blue absolute w-[380px] h-[380px] sm:w-[460px] sm:h-[460px] rounded-full bg-gradient-to-tr from-sky-500/40 via-blue-600/35 to-cyan-400/25 blur-[90px] -bottom-28 -left-20 pointer-events-none"></div>
+
+    <!-- Living Solar Emerald Green Orb -->
+    <div class="mobile-ambient-green absolute w-[390px] h-[390px] sm:w-[480px] sm:h-[480px] rounded-full bg-gradient-to-tl from-emerald-500/40 via-green-600/35 to-teal-400/25 blur-[95px] -bottom-32 -right-20 pointer-events-none"></div>
+  </div>
+
+  <!-- Mobile Ergonomic Wrapper -->
+  <main class="w-full max-w-[420px] mx-auto z-20 flex flex-col items-center flex-grow justify-center py-2 sm:py-6">
+    
+    <!-- Branding Header Section -->
+    <header class="flex flex-col items-center text-center mb-6 sm:mb-8 w-full">
+      
+      <!-- Brand Logo Container with Apple Liquid Rim -->
+      <div class="relative mb-3.5" onclick="haptic(20)">
+        <div class="absolute -inset-1.5 bg-gradient-to-tr from-emerald-500/50 to-sky-500/50 rounded-[2.3rem] blur-xl opacity-60"></div>
+        <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-[2rem] p-2 bg-slate-900/70 backdrop-blur-3xl border border-white/20 shadow-2xl flex items-center justify-center overflow-hidden">
+          <img 
+            src="Trade Tech Solar.png" 
+            alt="Trade Tech Solar Logo" 
+            class="w-full h-full object-contain rounded-2xl"
+            onerror="this.onerror=null; this.src='https://placehold.co/220x220/071720/10b981?text=Trade+Tech';"
+          />
+        </div>
+      </div>
+
+      <!-- Brand Title in Bricolage Grotesque Condensed -->
+      <h1 class="font-brand text-[2rem] sm:text-4xl font-extrabold uppercase tracking-tight text-white flex items-center justify-center gap-1.5 leading-none">
+        Trade Tech <span class="text-emerald-400 font-bold text-2xl sm:text-3xl">(SOLAR)</span>
+      </h1>
+
+      <!-- Status Pill -->
+      <div class="mt-2.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 backdrop-blur-md">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="text-[11px] font-medium tracking-wide uppercase text-slate-300">Clean Energy Solutions</span>
+      </div>
+
+      <p class="mt-2 text-xs text-slate-400 max-w-[280px] leading-relaxed">
+        High-efficiency rooftop solar systems & turnkey power solutions.
+      </p>
+    </header>
+
+    <!-- Ergonomic Action Link Stack (48px+ Touch Targets) -->
+    <section class="w-full space-y-3 px-1 sm:px-0">
+
+      <!-- 1. WhatsApp Button -->
+      <a 
+        href="https://wa.me/919242449052?text=Hi%2C%20Trade%20Tech%21%20I%20want%20to%20know%20about%20solar%21%20I%20am%20" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="liquid-glass-btn tint-whatsapp w-full min-h-[66px] px-4 py-3 flex items-center justify-between cursor-pointer"
+        onclick="haptic(18)"
+      >
+        <div class="flex items-center gap-3.5">
+          <!-- WhatsApp Icon Pod -->
+          <div class="w-12 h-12 rounded-xl icon-liquid-pod flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-[#25D366] drop-shadow-[0_2px_8px_rgba(37,211,102,0.45)]" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.031 2C6.511 2 2.029 6.48 2.029 12C2.029 13.79 2.506 15.47 3.337 16.92L2.059 21.64L6.907 20.37C8.309 21.14 9.907 21.57 11.587 21.57H11.602C17.112 21.57 21.594 17.09 21.594 11.57C21.594 6.05 17.112 2 12.031 2ZM12.031 19.92C10.511 19.92 9.069 19.51 7.822 18.77L7.525 18.59L4.654 19.34L5.424 16.54L5.228 16.23C4.428 14.95 4.004 13.48 4.004 11.96C4.004 7.54 7.604 3.94 12.034 3.94C16.454 3.94 20.054 7.54 20.054 11.97C20.044 16.4 16.454 19.92 12.031 19.92ZM16.424 14.39C16.184 14.27 15.004 13.69 14.784 13.61C14.564 13.53 14.404 13.49 14.244 13.73C14.084 13.97 13.634 14.5 13.494 14.66C13.354 14.82 13.224 14.84 12.984 14.72C12.744 14.6 11.974 14.35 11.054 13.53C10.334 12.89 9.854 12.1 9.714 11.86C9.574 11.62 9.704 11.49 9.824 11.37C9.934 11.26 10.064 11.08 10.184 10.94C10.304 10.8 10.344 10.7 10.424 10.54C10.504 10.38 10.464 10.24 10.404 10.12C10.344 10 9.864 8.82 9.664 8.34C9.464 7.86 9.274 7.92 9.124 7.91L8.664 7.9C8.504 7.9 8.254 7.96 8.044 8.19C7.834 8.42 7.244 8.97 7.244 10.09C7.244 11.21 8.064 12.29 8.184 12.45C8.304 12.61 9.794 14.9 12.084 15.89C12.634 16.13 13.054 16.27 13.394 16.38C13.944 16.55 14.444 16.53 14.844 16.47C15.284 16.4 16.194 15.92 16.384 15.39C16.574 14.85 16.574 14.4 16.524 14.31C16.474 14.22 16.334 14.17 16.094 14.05L16.424 14.39Z"/>
+            </svg>
+          </div>
+          <!-- Label & Text -->
+          <div class="text-left">
+            <span class="block font-brand text-lg font-bold tracking-tight text-white">
+              WhatsApp Us
+            </span>
+            <span class="block text-[11px] font-normal text-slate-300/80">Instant chat & inquiries</span>
+          </div>
+        </div>
+        <!-- Right Arrow Icon -->
+        <div class="text-slate-400/80 pr-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+        </div>
+      </a>
+
+      <!-- 2. Call Button (Google Dialer Aesthetic) -->
+      <a 
+        href="tel:+919242449052" 
+        class="liquid-glass-btn tint-call w-full min-h-[66px] px-4 py-3 flex items-center justify-between cursor-pointer"
+        onclick="haptic(18)"
+      >
+        <div class="flex items-center gap-3.5">
+          <!-- Google Dialer Pod -->
+          <div class="w-12 h-12 rounded-xl icon-liquid-pod flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 drop-shadow-[0_2px_8px_rgba(66,133,244,0.45)]" viewBox="0 0 48 48" fill="none">
+              <rect width="48" height="48" rx="12" fill="#1e293b" opacity="0.6"/>
+              <path d="M34.5 28.5L30.1 27.9C29.4 27.8 28.7 28 28.2 28.5L25.2 31.5C21.2 29.4 18.6 26.8 16.5 22.8L19.5 19.8C20 19.3 20.2 18.6 20.1 17.9L19.5 13.5C19.3 12.4 18.3 11.5 17.1 11.5H13.6C12.3 11.5 11.2 12.7 11.4 14C12.8 24.3 20.7 33.2 32 34.6C33.3 34.8 34.5 33.7 34.5 32.4V29.9C34.5 29.1 33.8 28.5 33.1 28.5H34.5Z" fill="#34A853"/>
+              <path d="M34.5 28.5L30.1 27.9C29.4 27.8 28.7 28 28.2 28.5L25.2 31.5C21.2 29.4 18.6 26.8 16.5 22.8L19.5 19.8C20 19.3 20.2 18.6 20.1 17.9L19.5 13.5C19.3 12.4 18.3 11.5 17.1 11.5H13.6C12.3 11.5 11.2 12.7 11.4 14" stroke="#4285F4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <!-- Label & Text -->
+          <div class="text-left">
+            <span class="block font-brand text-lg font-bold tracking-tight text-white">
+              Direct Call
+            </span>
+            <span class="block text-[11px] font-normal text-slate-300/80">+91 92424 49052</span>
+          </div>
+        </div>
+        <!-- Right Arrow Icon -->
+        <div class="text-slate-400/80 pr-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+        </div>
+      </a>
+
+      <!-- 3. Instagram Button -->
+      <a 
+        href="https://www.instagram.com/trade_tech_solar?rpxt=cnlrZmFibHB5NDl3" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="liquid-glass-btn tint-instagram w-full min-h-[66px] px-4 py-3 flex items-center justify-between cursor-pointer"
+        onclick="haptic(18)"
+      >
+        <div class="flex items-center gap-3.5">
+          <!-- Instagram Icon Pod -->
+          <div class="w-12 h-12 rounded-xl icon-liquid-pod flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 drop-shadow-[0_2px_8px_rgba(225,48,108,0.4)]" viewBox="0 0 24 24" fill="none">
+              <defs>
+                <linearGradient id="igMobGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#fdf497" />
+                  <stop offset="10%" stop-color="#fdf497" />
+                  <stop offset="50%" stop-color="#fd5949" />
+                  <stop offset="68%" stop-color="#d6249f" />
+                  <stop offset="100%" stop-color="#285AEB" />
+                </linearGradient>
+              </defs>
+              <rect x="2" y="2" width="20" height="20" rx="5.5" stroke="url(#igMobGrad)" stroke-width="2.2"/>
+              <circle cx="12" cy="12" r="4.3" stroke="url(#igMobGrad)" stroke-width="2.2"/>
+              <circle cx="17.5" cy="6.5" r="1.3" fill="url(#igMobGrad)"/>
+            </svg>
+          </div>
+          <!-- Label & Text -->
+          <div class="text-left">
+            <span class="block font-brand text-lg font-bold tracking-tight text-white">
+              Instagram
+            </span>
+            <span class="block text-[11px] font-normal text-slate-300/80">@trade_tech_solar</span>
+          </div>
+        </div>
+        <!-- Right Arrow Icon -->
+        <div class="text-slate-400/80 pr-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+        </div>
+      </a>
+
+      <!-- 4. Facebook Button -->
+      <a 
+        href="https://www.facebook.com/share/1JQ7C165vD/" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="liquid-glass-btn tint-facebook w-full min-h-[66px] px-4 py-3 flex items-center justify-between cursor-pointer"
+        onclick="haptic(18)"
+      >
+        <div class="flex items-center gap-3.5">
+          <!-- Facebook Icon Pod -->
+          <div class="w-12 h-12 rounded-xl icon-liquid-pod flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-[#1877F2] drop-shadow-[0_2px_8px_rgba(24,119,242,0.45)]" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </div>
+          <!-- Label & Text -->
+          <div class="text-left">
+            <span class="block font-brand text-lg font-bold tracking-tight text-white">
+              Facebook
+            </span>
+            <span class="block text-[11px] font-normal text-slate-300/80">Connect on Facebook</span>
+          </div>
+        </div>
+        <!-- Right Arrow Icon -->
+        <div class="text-slate-400/80 pr-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+        </div>
+      </a>
+
+    </section>
+
+    <!-- Mobile Clean Feature Summary Strip -->
+    <div class="mt-6 pt-5 w-full flex items-center justify-around border-t border-white/[0.07] text-center">
+      <div class="flex flex-col items-center">
+        <span class="text-emerald-400 text-xs font-semibold uppercase tracking-wider font-brand">Clean Solar</span>
+        <span class="text-[10px] text-slate-400">Zero Emissions</span>
+      </div>
+      <div class="h-5 w-px bg-white/10"></div>
+      <div class="flex flex-col items-center">
+        <span class="text-sky-400 text-xs font-semibold uppercase tracking-wider font-brand">Rooftop Plant</span>
+        <span class="text-[10px] text-slate-400">Max Savings</span>
+      </div>
+      <div class="h-5 w-px bg-white/10"></div>
+      <div class="flex flex-col items-center">
+        <span class="text-emerald-400 text-xs font-semibold uppercase tracking-wider font-brand">Support</span>
+        <span class="text-[10px] text-slate-400">Quick Turnaround</span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Mobile Notch-safe Minimal Footer -->
+  <footer class="w-full text-center py-2 z-20 text-[11px] text-slate-400/80 tracking-wide">
+    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.03] border border-white/5">
+      <span>&copy; <span id="currentYear"></span> Trade Tech (Solar)</span>
+    </div>
+  </footer>
+
+  <!-- Mobile Haptic Vibration Feedback -->
+  <script>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Tactile haptic pulse calibrated for iOS & Android WebKit
+    function haptic(duration = 18) {
+      if (typeof window !== 'undefined' && 'vibrate' in navigator) {
+        try {
+          navigator.vibrate([duration]);
+        } catch (e) {
+          /* Fallback gracefully */
+        }
+      }
+    }
+  </script>
+</body>
 </html>
